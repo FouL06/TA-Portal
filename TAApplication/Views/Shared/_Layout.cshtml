@@ -1,0 +1,220 @@
+﻿<!--
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      9/27/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Contains all html for NavBar, Footer and any view data that the controller submits to this page.
+    File is responsible for controlling the views and page display along with any meta data for that page.
+    Responsible for User Authentication of links and permissions control.
+-->
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Data
+@inject TAApplication.Data.ApplicationDbContext dbContext
+@inject UserManager<TAUser> UserManager
+
+
+@if (User.IsInRole("Applicant"))
+{
+    TAUser currentUser = await UserManager.GetUserAsync(User);
+    ViewData["ApplicationID"] = dbContext.Application.FirstOrDefault(application => application.user == currentUser)?.ID;
+    ViewData["AvailabilityID"] = dbContext.Availability.FirstOrDefault(availability => availability.User == currentUser)?.ID;
+}
+else
+{
+    ViewData["AvailabilityID"] = 1;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TAApplication</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TAApplication.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TA APPLICATION</a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    @if (User.IsInRole("Professor") || User.IsInRole("Applicant") || User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Applications</a>
+                            <ul class="dropdown-menu">
+                                @if (User.IsInRole("Professor") || User.IsInRole("Administrator"))
+                                {
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Applications" asp-action="List">List</a>
+                                    </li>
+                                }
+                                @if (User.IsInRole("Applicant"))
+                                {
+                                    @if (ViewData["ApplicationID"] != null)
+                                    {
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Applications" asp-action="Details" asp-route-id="@ViewData["ApplicationID"]">Details</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Applications" asp-action="Create">Create</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Courses</a>
+                            <ul class="dropdown-menu">
+                                @if (User.IsInRole("Professor") || User.IsInRole("Administrator") || User.IsInRole("Applicant"))
+                                {
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Courses" asp-action="List">List</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Applications" asp-action="Index">Application Index</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Roles">Roles</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="EnrollmentTrends">Enrollment Trends</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">TA</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a class="dropdown-item">Ashton Foulger / Kyle Charlton</a>
+                            </li>
+                            <hr />
+                            <li>
+                                <a class="dropdown-item">PS9</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="EnrollmentTrends">Enrollment Trends</a>
+                            </li>
+                            <hr />
+                            <li>
+                                <a class="dropdown-item">PS8</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Availability" asp-action="Index" asp-route-id='@ViewData["AvailabilityID"]'>Availability</a>
+                            </li>
+                            <hr />
+                            <li>
+                                <a class="dropdown-item">PS6</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Courses" asp-action="List">Course List</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Courses" asp-action="Details" asp-route-id="1">Course Details</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Courses" asp-action="Edit" asp-route-id="1">Course Edit</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Courses" asp-action="Create">Course Create</a>
+                            </li>
+                            <hr />
+                            <li>
+                                <a class="dropdown-item">PS5</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Applications" asp-action="Index">Application Dashboard</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Applications" asp-action="List">Application List</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Applications" asp-action="Details">Application Details</a>
+                            </li>
+                            <hr />
+                            <li>
+                                <a class="dropdown-item">Admin</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Roles">Roles</a>
+                            </li>
+                            <hr />
+                            <li>
+                                <a class="dropdown-item">OLD</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="OLD" asp-action="ApplicantList">ApplicantList</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="OLD" asp-action="ApplicantCreate">ApplicantCreate</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="OLD" asp-action="ApplicantDetails">ApplicantDetails</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    <footer style="position:absolute; width:100%; bottom:0;">
+        <div id="footer-container">
+            <ul>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                }
+            </ul>
+            <p>&copy; 2022 - University of Utah. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

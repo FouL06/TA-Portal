@@ -1,0 +1,140 @@
+﻿<!--
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      10/6/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Application Details.
+-->
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Data
+
+@inject UserManager<TAUser> um
+
+@model TAApplication.Models.Application
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@section Scripts {
+    <script>
+        $("#myList a").on("click", function (e) {
+            e.preventDefault();
+            $(this).tab("show");
+        });
+    </script>
+}
+
+    <div id="application-details" class="row p-4 flex-fill">
+        <div class="col-3">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-dark show active list-group-item-action"
+               id="list-name-list"
+               data-bs-toggle="list"
+               href="#list-name"
+               role="tab"
+               aria-controls="list-name">Name</a>
+                <a class="list-group-item list-group-item-dark list-group-item-action"
+               id="list-contact-list"
+               data-bs-toggle="list"
+               href="#list-contact"
+               role="tab"
+               aria-controls="list-contact">Contact Info</a>
+                <a class="list-group-item list-group-item-dark list-group-item-action"
+               id="list-academics-list"
+               data-bs-toggle="list"
+               href="#list-academics"
+               role="tab"
+               aria-controls="list-academics">Academic Info</a>
+                <a class="list-group-item list-group-item-dark list-group-item-action"
+               id="list-courses-list"
+               data-bs-toggle="list"
+               href="#list-courses"
+               role="tab"
+               aria-controls="list-courses">Courses</a>
+                <a class="list-group-item list-group-item-dark list-group-item-action"
+               id="list-statement-list"
+               data-bs-toggle="list"
+               href="#list-statement"
+               role="tab"
+               aria-controls="list-statement">Personal Statement</a>
+                <a class="list-group-item list-group-item-dark list-group-item-action"
+               id="list-linkden-list"
+               data-bs-toggle="list"
+               href="#list-linkden"
+               role="tab"
+               aria-controls="list-linkden">LinkedIn</a>
+                <a class="list-group-item list-group-item-dark list-group-item-action"
+               id="list-github-list"
+               data-bs-toggle="list"
+               href="#list-github"
+               role="tab"
+               aria-controls="list-github">GitHub</a>
+                <a class="list-group-item list-group-item-dark list-group-item-action"
+               id="list-resume-list"
+               data-bs-toggle="list"
+               href="#list-resume"
+               role="tab"
+               aria-controls="list-resume">Resume</a>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-name" role="tabpanel" aria-labelledby="list-name-list">
+                    <ul>
+                        <li>@Model.user?.Name</li>
+                    @if (Model.profilePicture != null && Model.profilePicture != null && Model.profilePicture != "")
+                    {
+                        <li><img src="~/uploads/@Model.profilePicture" alt="@Model.user?.Name profile picture" width="256"></li>
+                    }
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="list-contact" role="tabpanel" aria-labelledby="list-contact-list">
+                <ul>
+                    <li>Address: 123 Something Way Salt Lake City UT</li>
+                    <li>Desired Hours: @Html.DisplayFor(model => model.desiredHours)</li>
+                    <li>Work Before Semester Start: @Html.DisplayFor(model => model.available)</li>
+                    <li>Permission to view Academic Records: No</li>
+                    <li>Previous Teaching Experience: No</li>
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="list-academics" role="tabpanel" aria-labelledby="list-academics-list">
+                <ul>
+                    <li>Degree Pursued: @Html.DisplayFor(model => model.currentDegree)</li>
+                    <li>Degree Department: @Html.DisplayFor(model => model.department)</li>
+                    <li>Semesters Completed: @Html.DisplayFor(model => model.semestersCompleted)</li>
+                    <li>GPA: @Html.DisplayFor(model => model.GPA)</li>
+                    <li>Previous University: @Html.DisplayFor(model => model.transferSchool)</li>
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="list-courses" role="tabpanel" aria-labelledby="list-courses-list">None</div>
+            <div class="tab-pane fade" id="list-statement" role="tabpanel" aria-labelledby="list-statement-list">
+                @Html.DisplayFor(model => model.statement)
+            </div>
+            <div class="tab-pane fade" id="list-linkden" role="tabpanel" aria-labelledby="list-linkden-list">@Html.DisplayFor(model => model.linkedInUrl)</div>
+            <div class="tab-pane fade" id="list-github" role="tabpanel" aria-labelledby="list-github-list">NA</div>
+            <div class="tab-pane fade" id="list-resume" role="tabpanel" aria-labelledby="list-resume-list">
+                @if (Model.resume != null && Model.resume != "")
+                {
+                    <a href="~/uploads/@Model.resume">Link</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div>
+        @if (User.IsInRole("Applicant"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a>
+        }
+        @if (User.IsInRole("Professor") || User.IsInRole("Administrator"))
+        {
+            <a asp-action="List">Back to List</a>
+        }
+    </div>
+</div>

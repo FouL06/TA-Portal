@@ -1,0 +1,158 @@
+﻿/*
+Author: Ashton Foulger
+Partner: Kyle Charlton
+Date: 9/06/22
+Course: CS 4540, University of Utah, School of Computing
+Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+another source. Any references used in the completion of the assignment are cited in my README file.
+
+File Contents
+Contains the Home Page is HTML structure for the TA Application Portal.
+Structure goes as follows, General Page layout, applicants title, applicants table.
+Any and all meta data is contained under the head tag.
+*/
+
+/*
+    -------------------
+    General Page Layout
+    -------------------
+*/
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+#vertical-fill {
+    flex: 1;
+    overflow: auto;
+}
+
+/*
+    ----------------
+    Applicants Title
+    ----------------
+*/
+
+#info-title {
+    background-color: #FFFFFF;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3.9em 0px 0px 0px;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+/*
+    ----------------------
+    Application Data Cards
+    ----------------------
+*/
+
+#info-cards {
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.info-container {
+    background-color: #890000;
+    border-radius: 25px;
+    box-shadow: 2px 2px 6px 0 rgba(0,0,0,0.75);
+    color: #FFFFFF;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: relative;
+    width: 350px;
+    max-width: 100%;
+    text-align: center;
+    margin: 50px;
+    transition: transform 0.3s;
+}
+
+.info-container:hover {
+    transform: translateY(-8px);
+    box-shadow: 2px 2px 26px 0px rgba(0,0,0,0.75);
+}
+
+.info-container h3 {
+    font-size: 1.2rem;
+    margin: 12px 0px;
+}
+
+.info-container p {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 12px 0px;
+}
+
+@media screen and (max-width: 768px) {
+    #info-cards {
+        flex-direction: column;
+    }
+}
+
+/*
+    ----------------
+    Applicants Table
+    ----------------
+*/
+
+#applicants-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 25px;
+    font-family: 'Montserrat', sans-serif !important;
+    margin-bottom: 11rem;
+}
+
+#applicants-table {
+    border-collapse: collapse;
+    width: 80%;
+    text-align: center;
+}
+
+#applicants-table th {
+    background-color: #333;
+    color: #FFF;
+}
+
+#applicants-table tr:nth-child(2n+1) {
+    background-color: #F4F4F4;
+}
+
+#applicants-table th,
+#applicants-table td {
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: .75rem
+}
+
+.red-text {
+    font-weight: bold;
+    color: #C00;
+}
+
+.yellow-text {
+    font-weight: bold;
+    color: #FFC107;
+}
+
+.green-text {
+    font-weight: bold;
+    color: #28A745;
+}
+
+.blue-text {
+    font-weight: bold;
+    color: #007BFF;
+}

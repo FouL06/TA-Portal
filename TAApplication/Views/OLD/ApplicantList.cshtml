@@ -1,0 +1,131 @@
+﻿<!--
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      9/27/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Contains the Home Page is HTML structure for the TA Application Portal.
+    Structure goes as follows, Applicant data cards, Applicant review details in table form.
+    Any and all meta data is contained under the head tag.
+-->
+
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Data
+@inject SignInManager<TAUser> sm
+@inject UserManager<TAUser> um
+
+@{
+    ViewData["Title"] = "Applicants";
+}
+
+<!--Applicants Review Title-->
+<div id="info-title">
+    <h2>Application Metrics</h2>
+</div>
+
+<!--Applicants Review Data-->
+<div id="info-cards">
+    <div class="info-container">
+        <h3>Applicants</h3>
+        <p>4</p>
+    </div>
+
+    <div class="info-container">
+        <h3>In Review</h3>
+        <p>1</p>
+    </div>
+
+    <div class="info-container">
+        <h3>Employed</h3>
+        <p>2</p>
+    </div>
+</div>
+
+<!--Applicants Table-->
+<div id="applicants-container">
+    <table id="applicants-table">
+        <thead>
+            <tr>
+                <th>Prior Evaluation</th>
+                <th>Applicants Name</th>
+                <th>Employed In</th>
+                <th>Degree Track</th>
+                <th>Department</th>
+                <th>GPA</th>
+                <th>Last Modified</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="yellow-text">Okay</td>
+                <td>Seth Davis</td>
+                <td>CS 2420</td>
+                <td>B.S.</td>
+                <td>CS</td>
+                <td>3.3</td>
+                <td>15-Aug-2022</td>
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-area="" asp-controller="Home" asp-action="ApplicantDetails">Link</a>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="green-text">Good</td>
+                <td>Alexis Willson</td>
+                <td>ECE 3710</td>
+                <td>B.S.</td>
+                <td>CE</td>
+                <td>3.9</td>
+                <td>17-Aug-2022</td>
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-area="" asp-controller="Home" asp-action="ApplicantDetails">Link</a>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="blue-text">In Review</td>
+                <td>Isaac Nichols</td>
+                <td>
+                    <em>-unassigned-</em>
+                </td>
+                <td>Ph.D.</td>
+                <td>Math</td>
+                <td>3.7</td>
+                <td>20-Aug-2022</td>
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-area="" asp-controller="Home" asp-action="ApplicantDetails">Link</a>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="red-text">Rejected</td>
+                <td>Jen McCarthy</td>
+                <td>
+                    <em>-unassigned-</em>
+                </td>
+                <td>A.S.</td>
+                <td>Biology</td>
+                <td>2.4</td>
+                <td>20-Aug-2022</td>
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-area="" asp-controller="Home" asp-action="ApplicantDetails">Link</a>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

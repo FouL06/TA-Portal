@@ -1,0 +1,66 @@
+﻿@*
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      9/27/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Contains Datatables table structure, with bootstrap switches, and populate user data into table.
+*@
+
+@{
+    ViewData["Title"] = "Roles";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Data
+
+@inject UserManager<TAUser> um
+
+@section Scripts
+    {
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/Admin/Roles.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+}
+
+    <div class="container" style="margin-top: 5.5rem;">
+        <table id="table_id" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Administrator</th>
+                    <th>Professor</th>
+                    <th>Applicant</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (TAUser user in um.Users.ToList())
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" onChange="ChangeRoles('@user.Id', 'Administrator', this)" role="switch" @(await um.IsInRoleAsync(user, "Administrator") ? "checked" : "")>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" onChange="ChangeRoles('@user.Id', 'Professor', this)" role="switch" @(await um.IsInRoleAsync(user, "Professor") ? "checked" : "")>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" onChange="ChangeRoles('@user.Id', 'Applicant', this)" role="switch" @(await um.IsInRoleAsync(user, "Applicant") ? "checked" : "")>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

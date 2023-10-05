@@ -1,0 +1,64 @@
+﻿@*
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      12/1/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Contains HighCharts charts for Enrollments over time data.
+*@
+
+@{
+    ViewData["Title"] = "EnrollmentTrends";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Data
+
+@section Scripts
+    {
+    <script src="~/lib/jquery/dist/jquery.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js" type="text/javascript"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js" type="text/javascript"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js" type="text/javascript"></script>
+    <script src="~/js/Admin/Enrollments.js" type="text/javascript"></script>
+}
+
+    <div class="container" style="margin-top: 5em; margin-bottom: 11em;">
+        <div id="chart-controls" class="row">
+            <div class="col">
+                <label for="course">Course:</label>
+                <select id="course-select" for="course" class="form-control">
+                @foreach (var course in ViewData["Courses"] as List<string>)
+                {
+                    <option>@course</option>
+                }
+                </select>
+            </div>
+            <div class="col">
+                <label for="startDate">Start Date:</label>
+                <input id="start-date" class="form-control" type="date" value="2022-11-01" data-val="true" data-val-required="The enrollment Start date field is required." name="startDate" value="">
+            </div>
+            <div class="col">
+                <label for="endDate">End Date:</label>
+                <input id="end-date" class="form-control" type="date" data-val="true" data-val-required="The enrollment End date field is required." name="endDate" value="">
+            </div>
+            <div class="col">
+                <br />
+                <div class="d-flex">
+                    <button id="data-button" class="btn btn-primary" style="background-color:#C80000;color:white;border:none;" onclick="GetEnrollmentData()">Sync Enrollments</button>
+                    <div id="spinner" class="d-flex align-items-center" style="display:none !important;">
+                        <div class="spinner-border ms-2" role="status"></div>
+                        <span class="sr-only ms-2">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="chart-container"></div>
+    </div>

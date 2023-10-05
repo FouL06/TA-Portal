@@ -1,0 +1,45 @@
+﻿<!--
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      10/6/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Application Index Stats.
+-->
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!--Applicants Review Title-->
+<div id="info-title">
+    <h2>Application Metrics</h2>
+</div>
+
+<!--Applicants Review Data-->
+<div id="info-cards">
+    <div class="info-container">
+        <h3>Applicants</h3>
+        <p>@ViewData["numApplications"]</p>
+    </div>
+
+    <div class="info-container">
+        <h3>Average GPA</h3>
+        <p>@ViewData["averageGPA"]</p>
+    </div>
+
+    <div class="info-container">
+        <h3>Average Desired Hours</h3>
+        <p>@ViewData["averageHours"]</p>
+    </div>
+</div>
+
+<div id="application-list-link" class="px-4 py-5 my-5 text-center">
+    <button type="button" class="btn btn-primary btn-lg px-4 gap-3">
+        <a class="dropdown-item" style="text-decoration:none;color:inherit;" asp-controller="Applications" asp-action="List">View Application List</a>
+    </button>
+</div>

@@ -1,0 +1,126 @@
+﻿<!--
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      10/6/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Application Edit.
+-->
+
+@model TAApplication.Models.Application
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div id="form-container" class="container">
+    <div class="pb-3">
+        <h1>Certification of Elegibility</h1>
+        <p>
+            I certify that I have not been sactioned by the School of Computing
+            for Academic Misconduct and that I remain in good academic standing
+            with the School of Computing.
+        </p>
+    </div>
+    <hr />
+    <div id="application-form">
+        <h4>Application</h4>
+        <hr />
+        <div class="row">
+            <form method="post" enctype="multipart/form-data" asp-action="Edit" asp-route-id="@Model.ID">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="currentDegree" class="control-label"></label>
+                    <select asp-for="currentDegree" asp-items="@Html.GetEnumSelectList<currentDegree>()" class="form-control"></select>
+                    <span asp-validation-for="currentDegree" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="department" class="control-label"></label>
+                    <input asp-for="department" class="form-control" />
+                    <span asp-validation-for="department" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="GPA" class="control-label"></label>
+                    <input asp-for="GPA" class="form-control" />
+                    <span asp-validation-for="GPA" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="desiredHours" class="control-label"></label>
+                    <input asp-for="desiredHours" class="form-control" />
+                    <span asp-validation-for="desiredHours" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="available" /> @Html.DisplayNameFor(model => model.available)
+                    </label>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="semestersCompleted" class="control-label"></label>
+                    <input asp-for="semestersCompleted" class="form-control" />
+                    <span asp-validation-for="semestersCompleted" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="statement" class="control-label"></label>
+                    <textarea asp-for="statement" class="form-control"></textarea>
+                    <span asp-validation-for="statement" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="transferSchool" class="control-label"></label>
+                    <input asp-for="transferSchool" class="form-control" />
+                    <span asp-validation-for="transferSchool" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="linkedInUrl" class="control-label"></label>
+                    <input asp-for="linkedInUrl" class="form-control" />
+                    <span asp-validation-for="linkedInUrl" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="resume" class="control-label"></label>
+                    <input type="file" name="resume" asp-for="resume" class="form-control" multiple />
+                    <span asp-validation-for="resume" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="profilePicture" class="control-label"></label>
+                    <input type="file" name="profilePicture" asp-for="profilePicture" class="form-control" multiple />
+                    <span asp-validation-for="profilePicture" class="text-danger"></span>
+                </div>
+                <div>
+                    @if (ViewData.TryGetValue("ResumeError", out _))
+                    {
+                        <p>
+                            @ViewData["ResumeError"]
+                        </p>
+                    }
+
+                    @if (ViewData.TryGetValue("ProfilePictureError", out _))
+                    {
+                        <p>
+                            @ViewData["ProfilePictureError"]
+                        </p>
+                    }
+                </div>
+                <div id="submit-button" class="col-md-6 mb-3">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+
+        @if (User.IsInRole("Administrator") || User.IsInRole("Professor"))
+        {
+            <div>
+                <a asp-action="List">Back to List</a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

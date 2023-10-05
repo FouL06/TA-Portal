@@ -1,0 +1,38 @@
+﻿/*
+Author: Ashton Foulger
+Partner: Kyle Charlton
+Date: 9/26/22
+Course: CS 4540, University of Utah, School of Computing
+Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+another source. Any references used in the completion of the assignment are cited in my README file.
+
+File Contents:
+    Application Form Css
+*/
+
+#form-container {
+    margin-top: 5em !important;
+    margin-bottom: 11rem !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+#submit-button {
+    padding: 20px 0 0 0 !important;
+}
+
+.btn {
+    background-color: #C80000 !important;
+    padding: 1rem 4rem 1rem 4rem !important;
+    border-radius: 15px !important;
+    font-size: 1.2rem !important;
+    border: none !important;
+    box-shadow: 2px 2px 6px 0 rgba(0,0,0,0.75) !important;
+    transition: transform 0.3s !important;
+}
+
+.btn:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 2px 2px 26px 0px rgba(0,0,0,0.75) !important;
+}

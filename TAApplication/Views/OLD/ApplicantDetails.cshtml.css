@@ -1,0 +1,19 @@
+﻿/*
+Author: Ashton Foulger
+Partner: Kyle Charlton
+Date: 9/27/22
+Course: CS 4540, University of Utah, School of Computing
+Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+another source. Any references used in the completion of the assignment are cited in my README file.
+
+File Contents:
+    Application Details Css
+*/
+
+#application-details {
+    margin-top: 5.5rem !important;
+    margin-bottom:auto 5.5rem !important;
+    font-family: 'Montserrat', sans-serif !important;
+}

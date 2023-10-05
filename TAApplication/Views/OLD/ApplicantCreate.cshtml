@@ -1,0 +1,125 @@
+﻿<!--
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      9/27/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Contains a bootstrap application form that contains all nessesary and extra content for applying to a TA/TM role.
+-->
+
+@{
+    ViewData["Title"] = "ApplicantCreate";
+}
+
+<!--Application Form-->
+<div id="form-container" class="container">
+    <div class="pb-3">
+        <h1>Certification of Elegibility</h1>
+        <p>
+            I certify that I have not been sactioned by the School of Computing
+            for Academic Misconduct and that I remain in good academic standing
+            with the School of Computing.
+        </p>
+    </div>
+    <hr />
+    <div id="application-form">
+        <h1>Application</h1>
+        <p>
+            Provide the following information to apply for a TA/TM position
+            with the School of Computing.
+        </p>
+        <form>
+            <div class="col-md-6 mb-3">
+                <label for="personal-pronouns">Pronouns</label>
+                <input id="personal-pronouns" class="form-control" type="text" placeholder="" value="" required="" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="position">Desired Position</label>
+                <select id="position" class="form-select" data-val-required="The Desired Position field is required." name="position">
+                    <option value="0">Teaching Assistant</option>
+                    <option value="1">Teaching Menteeship (PhD Students)</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="degree">Degree Pursued</label>
+                <select id="degree" class="form-select" data-val-required="The Degree Pursued field is required." name="degree">
+                    <option value="0">Bachelors</option>
+                    <option value="1">BS/MS</option>
+                    <option value="2">Masters</option>
+                    <option value="3">Doctorate</option>
+                    <option value="4">Non Student</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="department">Degree Department</label>
+                <input id="department" class="form-control" list="possible-departments" type="text" data-val="true" data-val-required="The Degree Department field is required." name="department" placeholder="CS" value="">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="semesters">Semesters Completeed at U of U</label>
+                <input id="semesters" class="form-control" type="number" data-val="true" data-val-required="The Semesters Completed at U of U field is required." name="semesters" placeholder="0" value="">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="gpa">GPA</label>
+                <input id="gpa" class="form-control" type="text" data-val="true" data-val-required="The GPA field is required." name="semesters" placeholder="0" value="">
+            </div>
+            <div class="col-md-6 mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="available-week-before-check" />
+                <label for="available-week-before">Available the Week Before Semester Start?</label>
+            </div>
+            <div class="col-md-6 mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="permission-to-view" data-val="true" data-val-required="The Permission to View Academic Records field is required." />
+                <label for="permission-to-view">Permission to view Academic Records?</label>
+            </div>
+            <div class="col-md-6 mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="previous-teaching-experience" />
+                <label for="previous-teaching-experience">Previous Teaching Experience?</label>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="hours">Desired Hours</label>
+                <input id="hours" class="form-control" type="number" data-val="true" data-val-required="The Desired Hours field is required." name="hours" placeholder="20" value="" data-val="true" data-val-required="The Desired Hours field is required.">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="address">Address</label>
+                <input id="address" class="form-control" type="text" data-val="true" data-val-required="The Address field is required." name="address" placeholder="" value="">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="previous-university">Previous University</label>
+                <input id="previous-university" class="form-control" type="text" name="previous-university" placeholder="None" value="None">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="english-fluency">English Fluency</label>
+                <select id="english-fluency" class="form-select" data-val-required="The English Fluency field is required." name="english-fluency">
+                    <option value="0">Native</option>
+                    <option value="1">Fluent</option>
+                    <option value="2">Adequate</option>
+                    <option value="3">Poor</option>
+                    <option value="4">None</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="github">Github (optional)</label>
+                <input id="github" class="form-control" type="text" name="github" placeholder="None" value="None">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="linkden">Linkden (optional)</label>
+                <input id="linkden" class="form-control" type="text" name="linkden" placeholder="None" value="None">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="resume">Resume Upload</label>
+                <input class="form-control" type="file" id="resume" />
+            </div>
+            <div class="col-md-6 md-3">
+                <lable for="statement">Why Should we Hire You?</lable>
+                <textarea id="statement" class="form-control" data-val="true" data-val-length="The statement section can only contain 50000 characters." data-val-length-max="50000" maxlength="50000" name="statement" placeholder="Tell us about yourself!"></textarea>
+            </div>
+            <div id="submit-button" class="col-md-6 md-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

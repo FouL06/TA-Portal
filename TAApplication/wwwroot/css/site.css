@@ -1,0 +1,103 @@
+/*
+Author: Ashton Foulger
+Partner: Kyle Charlton
+Date: 9/26/22
+Course: CS 4540, University of Utah, School of Computing
+Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+another source. Any references used in the completion of the assignment are cited in my README file.
+
+File Contents
+Contains the Home Page is HTML structure for the TA Application Portal.
+Structure goes as follows, NavBar and Footer code for all pages.
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: "Montserrat", sans-serif !important;
+}
+
+/*
+    ------------
+    Nav-Menu CSS
+    ------------
+*/
+
+.navbar {
+    background-color: #cc0000 !important;
+    font-family: "Montserrat", sans-serif !important;
+}
+
+.container-fluid li a {
+    color: #ffffff !important;
+    font-family: "Montserrat", sans-serif !important;
+}
+
+.container-fluid li a:hover {
+    color: #000000 !important;
+    transition: all 0.2s ease-out !important;
+}
+
+.dropdown-menu {
+    background-color: #cc0000 !important;
+    border: none !important;
+}
+
+.dropdown-menu li a {
+    background-color: #cc0000 !important;
+}
+
+.dropdown-menu li a:hover {
+    color: #000000 !important;
+    transition: all 0.2s ease-out !important;
+}
+
+/*
+    ----------
+    Footer CSS
+    ----------
+*/
+
+#footer-container {
+    background-color: #372c2c;
+    color: black;
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(white, 0.4);
+    font-family: "Montserrat", sans-serif !important;
+}
+
+#footer-container ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#footer-container li {
+    display: inline-block;
+}
+
+#footer-container a {
+    text-decoration: none;
+    display: block;
+    padding: 0.4rem 0.7rem;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+#footer-container p {
+    color: #ffffff;
+}
+
+#footer-container a:hover {
+    color: rgb(198, 198, 198);
+}

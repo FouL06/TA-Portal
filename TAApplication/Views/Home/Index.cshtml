@@ -1,0 +1,80 @@
+﻿<!--
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      9/27/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Contains the Home Page is HTML structure for the TA Application Portal.
+    Structure goes as follows, Header/Hero, Market Cards.
+    Any and all meta data is contained under the head tag.
+-->
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!--Home Page Header-->
+<div id="header-image" class="d-flex align-items-center justify-content-center vh-100">
+    <div id="header-container" class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">School of Computing</h1>
+        <h2>TA and TM Applications</h2>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Help influence the next generation of software developers!</p>
+
+            @if (!User.IsInRole("Administrator") && !User.IsInRole("Professor"))
+            {
+                <button type="button" class="btn btn-primary btn-lg px-4 gap-3">
+                    @if (User.IsInRole("Applicant"))
+                    {
+                        @if (ViewData["ApplicationID"] == null)
+                        {
+                            <a style="text-decoration:none;color:inherit;" asp-controller="Applications" asp-action="Create">Apply Now!</a>
+                        }
+                        else
+                        {
+                            <a style="text-decoration:none;color:inherit;" asp-controller="Applications" asp-action="Details" asp-route-id="@ViewData["ApplicationID"]">View Application!</a>
+                        }
+                    }
+                    else if (User.Identity?.IsAuthenticated == false)
+                    {
+                        <a style="text-decoration:none;color:inherit;" asp-area="Identity" asp-page="/Account/Register">Apply Now!</a>
+                    }
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+<!--Market Cards-->
+<div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+    <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <i class="bi bi-book d-flex justify-content-center"></i>
+                <h3 class="mt-5 mb-4 display-6 lh-1 fw-bold">Learn to teach, review and grade code for hundreds of CS and DS students!</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-2.jpg');">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <i class="bi bi-pencil d-flex justify-content-center"></i>
+                <h3 class="mt-5 mb-4 display-6 lh-1 fw-bold">Help students with challenging problems from many areas of study!</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-3.jpg');">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <i class="bi bi-code-square d-flex justify-content-center"></i>
+                <h3 class="mt-5 mb-4 display-6 lh-1 fw-bold">Show employeers your skills in code review and problem solving!</h3>
+            </div>
+        </div>
+    </div>
+</div>

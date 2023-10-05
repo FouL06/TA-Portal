@@ -1,0 +1,84 @@
+﻿/*
+Author: Ashton Foulger
+Partner: Kyle Charlton
+Date: 9/26/22
+Course: CS 4540, University of Utah, School of Computing
+Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+another source. Any references used in the completion of the assignment are cited in my README file.
+
+File Contents
+Contains the Home Page is HTML structure for the TA Application Portal.
+Structure goes as follows, Header/Hero, Market Cards.
+*/
+
+/*
+    --------------------
+    Home Page Header CSS
+    --------------------
+*/
+
+#header-image {
+    background-image: linear-gradient( to bottom, rgba(118, 118, 118, 0.52), rgba(0, 0, 0, 0.83) ), url(/images/uofu.jpg) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    color: #ffffff !important;
+    font-family: "Montserrat", sans-serif !important;
+}
+
+#header-image h1 h2 p {
+    text-shadow: 2px 2px 5px black !important;
+}
+
+#header-image button {
+    background-color: #cc0000 !important;
+    border: none !important;
+    border-radius: 15px !important;
+    box-shadow: 2px 2px 8px black !important;
+}
+
+#header-image button:hover {
+    background-color: transparent !important;
+    color: white !important;
+    border: solid 2px #cc0000 !important;
+    text-shadow: 2px 2px 5px black !important;
+    transition: all 0.2s ease-out !important;
+}
+
+/*
+----------------
+Market Cards CSS
+----------------
+*/
+
+.row {
+    margin-left: 80px !important;
+    margin-right: 80px !important;
+    margin-bottom: 8.5rem !important;
+    font-family: "Montserrat", sans-serif !important;
+}
+
+.card {
+    border-radius: 25px !important;
+    background-color: #890000 !important;
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.75) !important;
+    transition: transform 0.3s !important;
+}
+
+.card i {
+    font-size: 8rem;
+}
+
+.card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 2px 2px 26px 0px rgba(0, 0, 0, 0.75) !important;
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+}

@@ -1,0 +1,120 @@
+﻿<!--
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      10/19/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Courses Details.
+-->
+@model TAApplication.Models.Course
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container" style="margin-top: 5em; margin-bottom: 11rem;">
+    <h1>Details</h1>
+
+    <div>
+        <h4>Course</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Semester)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Semester)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Year)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Year)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CourseName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Department)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Department)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CourseNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CourseNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Section)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Section)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProfessorUNID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProfessorUNID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProfessorName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProfessorName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TimeOffered)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TimeOffered)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Location)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Location)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CreditHours)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CreditHours)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NumEnrolled)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NumEnrolled)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Notes)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Notes)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @if (User.IsInRole("Administrator") || User.IsInRole("Professor"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a>
+        }
+        <a asp-action="List">Back to List</a>
+    </div>
+</div>

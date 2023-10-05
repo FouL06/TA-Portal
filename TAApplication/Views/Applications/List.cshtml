@@ -1,0 +1,94 @@
+﻿<!--
+  Author:    Ashton Foulger
+  Partner:   Kyle Charlton
+  Date:      10/6/22
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Ashton Foulger, Kyle Charlton - This work may not be copied for use in Academic Coursework.
+
+  We, Ashton Foulger, and Kyle Charlton, certify that we wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+    Application List Page.
+-->
+@model IEnumerable<TAApplication.Models.Application>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+@section Scripts {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+}
+
+    <div class="container" style="margin-top: 5.5rem;">
+        <table id="table_id" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Degree</th>
+                    <th>Dept</th>
+                    <th>GPA</th>
+                    <th>Desired Hours</th>
+                    <th>Available</th>
+                    <th>Semesters Completed</th>
+                    <th>Transfered School</th>
+                    <th>LinkedIn</th>
+                    <th>Resume</th>
+                    <th>Modified Date</th>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <th>Modified By</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.profilePicture != null && item.profilePicture != null && item.profilePicture != "")
+                        {
+                            <img src="~/uploads/@item.profilePicture" alt="@item.user?.Name profile picture" width="64" height="64">
+                        }
+                    </td>
+                    <td><a asp-area="" asp-controller="Applications" asp-action="Details" asp-route-id="@item.ID">@item.user?.Name</a></td>
+                    <td>@item.currentDegree</td>
+                    <td>@item.department</td>
+                    <td>@item.GPA</td>
+                    <td>@item.desiredHours</td>
+                    <td>
+                        @if (item.available.Equals(true))
+                        {
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked disabled>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" disabled>
+                            </div>
+                        }
+                    </td>
+                    <td>@item.semestersCompleted</td>
+                    <td>@item.transferSchool</td>
+                    <td><a href="@item.linkedInUrl">Link</a></td>
+                    <td><a href="~/uploads/@item.resume">Link</a></td>
+                    <td>@item.ModificationDate</td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <td>@item.ModifiedBy</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
